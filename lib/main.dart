@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:pokefinder/dynamic_poke_element_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokefinder/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    ProviderScope(
+      child: PokeFinderApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class PokeFinderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PokeTypeFinder',
+      title: 'PokeFinder',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primaryColor: Color(0xFFeb6652),
       ),
-      home: DynamicPokeElementPage(),
+      home: HomePage(),
     );
   }
 }

@@ -1,8 +1,8 @@
-import 'package:pokefinder/model/poke_element_model.dart';
+import 'package:pokefinder/model/poke_type.dart';
 
 class SelectedPokeElement {
-  final PokeElement primary;
-  final PokeElement? secondary;
+  final PokeType primary;
+  final PokeType? secondary;
 
   SelectedPokeElement({required this.primary, this.secondary});
 }

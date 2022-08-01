@@ -1,12 +1,12 @@
 import 'package:pokefinder/model/all_poke_element.dart';
 import 'package:pokefinder/model/attack_effect_model.dart';
 import 'package:pokefinder/model/poke_damage_element.dart';
-import 'package:pokefinder/model/poke_element_model.dart';
+import 'package:pokefinder/model/poke_type.dart';
 
 enum Effective { WEAKNESS, RESISTANCE }
 
 class ElementCalculator {
-  static final List<PokeElement> allElements = [
+  static final List<PokeType> allElements = [
     Normal,
     Fire,
     Water,
@@ -28,16 +28,16 @@ class ElementCalculator {
   ];
 
   static PokeDamageElement findTheMostEffectiveAttackByEnemyType({
-    required PokeElement primary,
-    PokeElement? secondary,
+    required PokeType primary,
+    PokeType? secondary,
   }) {
     if(secondary == primary) secondary = null;
-    List<PokeElement> megaEffective = [];
-    List<PokeElement> superEffective = [];
-    List<PokeElement> normalEffective = [];
-    List<PokeElement> notVeryEffective = [];
-    List<PokeElement> slightlyEffective = [];
-    List<PokeElement> noEffective = [];
+    List<PokeType> megaEffective = [];
+    List<PokeType> superEffective = [];
+    List<PokeType> normalEffective = [];
+    List<PokeType> notVeryEffective = [];
+    List<PokeType> slightlyEffective = [];
+    List<PokeType> noEffective = [];
 
     allElements.forEach((element) {
       AtkEffect? effectivePrimary;
@@ -88,8 +88,8 @@ class ElementCalculator {
   }
 
   static AtkEffect? _searchEffectByElement({
-    required PokeElement elementThatTakenDamage,
-    required PokeElement elementThatAttack,
+    required PokeType elementThatTakenDamage,
+    required PokeType elementThatAttack,
   }) {
     AtkEffect? output;
     switch (elementThatTakenDamage) {

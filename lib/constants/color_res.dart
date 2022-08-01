@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HexColor extends Color {
-  HexColor._(int value) : super(value);
+class ColorRes extends Color {
+  ColorRes._(int value) : super(value);
 
-  factory HexColor(String hexString) {
+  static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
     buffer.write(hexString.replaceFirst('#', ''));
-    return HexColor._(int.parse(buffer.toString(), radix: 16));
+    return ColorRes._(int.parse(buffer.toString(), radix: 16));
   }
 }

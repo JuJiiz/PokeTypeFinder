@@ -11,7 +11,7 @@ class AtkEffect {
   static const NoEffective = const AtkEffect._(0);
 }
 
-class ElementAttackModel {
+class TypeAttackModel {
   final AtkEffect normal,
       fire,
       water,
@@ -31,7 +31,7 @@ class ElementAttackModel {
       steel,
       fairly;
 
-  const ElementAttackModel({
+  const TypeAttackModel({
     this.normal = AtkEffect.NormalEffective,
     this.fire = AtkEffect.NormalEffective,
     this.water = AtkEffect.NormalEffective,

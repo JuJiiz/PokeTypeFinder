@@ -1,20 +1,23 @@
+import 'package:flutter/material.dart';
 import 'package:pokefinder/model/attack_effect_model.dart';
-import 'package:pokefinder/model/poke_element_model.dart';
+import 'package:pokefinder/model/poke_type.dart';
 
-const Normal = const PokeElement.init(
+const Normal = const PokeType.init(
+  1,
   "Normal",
-  "#A8A77A",
-  ElementAttackModel(
+  Color(0xFFA8A77A),
+  TypeAttackModel(
     ghost: AtkEffect.NoEffective,
     rock: AtkEffect.NotVeryEffective,
     steel: AtkEffect.NotVeryEffective,
   ),
 );
 
-const Fire = const PokeElement.init(
+const Fire = const PokeType.init(
+  2,
   "Fire",
-  "#EE8130",
-  ElementAttackModel(
+  Color(0xFFEE8130),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     water: AtkEffect.NotVeryEffective,
     rock: AtkEffect.NotVeryEffective,
@@ -26,10 +29,11 @@ const Fire = const PokeElement.init(
   ),
 );
 
-const Water = const PokeElement.init(
+const Water = const PokeType.init(
+  3,
   "Water",
-  "#6390F0",
-  ElementAttackModel(
+  Color(0xFF6390F0),
+  TypeAttackModel(
     water: AtkEffect.NotVeryEffective,
     grass: AtkEffect.NotVeryEffective,
     dragon: AtkEffect.NotVeryEffective,
@@ -39,10 +43,11 @@ const Water = const PokeElement.init(
   ),
 );
 
-const Electric = const PokeElement.init(
+const Electric = const PokeType.init(
+  4,
   "Electric",
-  "#F7D02C",
-  ElementAttackModel(
+  Color(0xFFF7D02C),
+  TypeAttackModel(
     ground: AtkEffect.NoEffective,
     electric: AtkEffect.NotVeryEffective,
     grass: AtkEffect.NotVeryEffective,
@@ -52,10 +57,11 @@ const Electric = const PokeElement.init(
   ),
 );
 
-const Grass = const PokeElement.init(
+const Grass = const PokeType.init(
+  5,
   "Grass",
-  "#7AC74C",
-  ElementAttackModel(
+  Color(0xFF7AC74C),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     grass: AtkEffect.NotVeryEffective,
     poison: AtkEffect.NotVeryEffective,
@@ -69,10 +75,11 @@ const Grass = const PokeElement.init(
   ),
 );
 
-const Ice = const PokeElement.init(
+const Ice = const PokeType.init(
+  6,
   "Ice",
-  "#96D9D6",
-  ElementAttackModel(
+  Color(0xFF96D9D6),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     water: AtkEffect.NotVeryEffective,
     ice: AtkEffect.NotVeryEffective,
@@ -84,10 +91,11 @@ const Ice = const PokeElement.init(
   ),
 );
 
-const Fighting = const PokeElement.init(
+const Fighting = const PokeType.init(
+  7,
   "Fighting",
-  "#C22E28",
-  ElementAttackModel(
+  Color(0xFFC22E28),
+  TypeAttackModel(
     ghost: AtkEffect.NoEffective,
     poison: AtkEffect.NotVeryEffective,
     flying: AtkEffect.NotVeryEffective,
@@ -102,10 +110,11 @@ const Fighting = const PokeElement.init(
   ),
 );
 
-const Poison = const PokeElement.init(
+const Poison = const PokeType.init(
+  8,
   "Poison",
-  "#A33EA1",
-  ElementAttackModel(
+  Color(0xFFA33EA1),
+  TypeAttackModel(
     steel: AtkEffect.NoEffective,
     poison: AtkEffect.NotVeryEffective,
     ground: AtkEffect.NotVeryEffective,
@@ -116,10 +125,11 @@ const Poison = const PokeElement.init(
   ),
 );
 
-const Ground = const PokeElement.init(
+const Ground = const PokeType.init(
+  9,
   "Ground",
-  "#E2BF65",
-  ElementAttackModel(
+  Color(0xFFE2BF65),
+  TypeAttackModel(
     flying: AtkEffect.NoEffective,
     grass: AtkEffect.NotVeryEffective,
     bug: AtkEffect.NotVeryEffective,
@@ -131,10 +141,11 @@ const Ground = const PokeElement.init(
   ),
 );
 
-const Flying = const PokeElement.init(
+const Flying = const PokeType.init(
+  10,
   "Flying",
-  "#A98FF3",
-  ElementAttackModel(
+  Color(0xFFA98FF3),
+  TypeAttackModel(
     electric: AtkEffect.NotVeryEffective,
     rock: AtkEffect.NotVeryEffective,
     steel: AtkEffect.NotVeryEffective,
@@ -144,10 +155,11 @@ const Flying = const PokeElement.init(
   ),
 );
 
-const Psychic = const PokeElement.init(
+const Psychic = const PokeType.init(
+  11,
   "Psychic",
-  "#F95587",
-  ElementAttackModel(
+  Color(0xFFF95587),
+  TypeAttackModel(
     dark: AtkEffect.NoEffective,
     psychic: AtkEffect.NotVeryEffective,
     steel: AtkEffect.NotVeryEffective,
@@ -156,10 +168,11 @@ const Psychic = const PokeElement.init(
   ),
 );
 
-const Bug = const PokeElement.init(
+const Bug = const PokeType.init(
+  12,
   "Bug",
-  "#A6B91A",
-  ElementAttackModel(
+  Color(0xFFA6B91A),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     fighting: AtkEffect.NotVeryEffective,
     flying: AtkEffect.NotVeryEffective,
@@ -173,10 +186,11 @@ const Bug = const PokeElement.init(
   ),
 );
 
-const Rock = const PokeElement.init(
+const Rock = const PokeType.init(
+  13,
   "Rock",
-  "#B6A136",
-  ElementAttackModel(
+  Color(0xFFB6A136),
+  TypeAttackModel(
     fighting: AtkEffect.NotVeryEffective,
     ground: AtkEffect.NotVeryEffective,
     steel: AtkEffect.NotVeryEffective,
@@ -187,10 +201,11 @@ const Rock = const PokeElement.init(
   ),
 );
 
-const Ghost = const PokeElement.init(
+const Ghost = const PokeType.init(
+  14,
   "Ghost",
-  "#735797",
-  ElementAttackModel(
+  Color(0xFF735797),
+  TypeAttackModel(
     normal: AtkEffect.NoEffective,
     dark: AtkEffect.NotVeryEffective,
     psychic: AtkEffect.SuperEffective,
@@ -198,20 +213,22 @@ const Ghost = const PokeElement.init(
   ),
 );
 
-const Dragon = const PokeElement.init(
+const Dragon = const PokeType.init(
+  15,
   "Dragon",
-  "#6F35FC",
-  ElementAttackModel(
+  Color(0xFF6F35FC),
+  TypeAttackModel(
     fairly: AtkEffect.NoEffective,
     steel: AtkEffect.NotVeryEffective,
     dragon: AtkEffect.SuperEffective,
   ),
 );
 
-const Dark = const PokeElement.init(
+const Dark = const PokeType.init(
+  16,
   "Dark",
-  "#705746",
-  ElementAttackModel(
+  Color(0xFF705746),
+  TypeAttackModel(
     fighting: AtkEffect.NotVeryEffective,
     dark: AtkEffect.NotVeryEffective,
     fairly: AtkEffect.NotVeryEffective,
@@ -220,10 +237,11 @@ const Dark = const PokeElement.init(
   ),
 );
 
-const Steel = const PokeElement.init(
+const Steel = const PokeType.init(
+  17,
   "Steel",
-  "#B7B7CE",
-  ElementAttackModel(
+  Color(0xFFB7B7CE),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     water: AtkEffect.NotVeryEffective,
     electric: AtkEffect.NotVeryEffective,
@@ -234,10 +252,11 @@ const Steel = const PokeElement.init(
   ),
 );
 
-const Fairly = const PokeElement.init(
+const Fairly = const PokeType.init(
+  18,
   "Fairly",
-  "#D685AD",
-  ElementAttackModel(
+  Color(0xFFD685AD),
+  TypeAttackModel(
     fire: AtkEffect.NotVeryEffective,
     poison: AtkEffect.NotVeryEffective,
     steel: AtkEffect.NotVeryEffective,
