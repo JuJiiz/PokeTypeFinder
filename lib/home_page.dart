@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokefinder/model/poke_type.dart';
 import 'package:pokefinder/provider/provider.dart';
-import 'package:pokefinder/widget/poketype_effective_view.dart';
+import 'package:pokefinder/widget/effective_result_view.dart';
 import 'package:pokefinder/widget/poketype_list_view.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -20,22 +20,37 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        color: Color(0xFF5e5d5d),
+        color: Theme.of(context).backgroundColor,
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  PokeTypeListView(onSelectPokeType: _onSelectPokeType),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Divider(color: Theme.of(context).primaryColor),
+          child: Row(
+            children: [
+              Flexible(
+                flex: 2,
+                child: Container(
+                  height: double.infinity,
+                  padding: EdgeInsets.all(16),
+                  alignment: Alignment.center,
+                  color: Theme.of(context).primaryColor,
+                  child: PokeTypeListView(
+                    onSelectPokeType: _onSelectPokeType,
                   ),
-                  const PokeTypeEffectiveView(),
-                ],
+                ),
               ),
-            ),
+              VerticalDivider(
+                color: Color(0xFF1A1A1A),
+                width: 16,
+                thickness: 16,
+              ),
+              Flexible(
+                flex: 4,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: const EffectiveResultView(),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,53 +1,52 @@
-import 'package:pokefinder/model/all_poke_element.dart';
-import 'package:pokefinder/model/attack_effect_model.dart';
-import 'package:pokefinder/model/poke_damage_element.dart';
+import 'package:pokefinder/model/effective.dart';
+import 'package:pokefinder/model/effective_type_result.dart';
 import 'package:pokefinder/model/poke_type.dart';
 
-enum Effective { WEAKNESS, RESISTANCE }
-
 class ElementCalculator {
-  static final List<PokeType> allElements = [
-    Normal,
-    Fire,
-    Water,
-    Electric,
-    Grass,
-    Ice,
-    Fighting,
-    Poison,
-    Ground,
-    Flying,
-    Psychic,
-    Bug,
-    Rock,
-    Ghost,
-    Dragon,
-    Dark,
-    Steel,
-    Fairly,
-  ];
+  ElementCalculator._();
 
-  static PokeDamageElement findTheMostEffectiveAttackByEnemyType({
+  static Effective _searchEffectByElement({
+    required PokeType elementThatTakenDamage,
+    required PokeType elementThatAttack,
+  }) {
+    Effective output = elementThatTakenDamage.map(
+      normal: (e) => elementThatAttack.atk.normal,
+      fire: (e) => elementThatAttack.atk.fire,
+      water: (e) => elementThatAttack.atk.water,
+      electric: (e) => elementThatAttack.atk.electric,
+      grass: (e) => elementThatAttack.atk.grass,
+      ice: (e) => elementThatAttack.atk.ice,
+      fighting: (e) => elementThatAttack.atk.fighting,
+      poison: (e) => elementThatAttack.atk.poison,
+      ground: (e) => elementThatAttack.atk.ground,
+      flying: (e) => elementThatAttack.atk.flying,
+      psychic: (e) => elementThatAttack.atk.psychic,
+      bug: (e) => elementThatAttack.atk.bug,
+      rock: (e) => elementThatAttack.atk.rock,
+      ghost: (e) => elementThatAttack.atk.ghost,
+      dragon: (e) => elementThatAttack.atk.dragon,
+      dark: (e) => elementThatAttack.atk.dark,
+      steel: (e) => elementThatAttack.atk.steel,
+      fairly: (e) => elementThatAttack.atk.fairly,
+    );
+
+    return output;
+  }
+
+  static EffectiveTypeResult findTheMostEffectiveAttackByEnemyType({
     required PokeType primary,
     PokeType? secondary,
   }) {
-    if(secondary == primary) secondary = null;
-    List<PokeType> megaEffective = [];
-    List<PokeType> superEffective = [];
-    List<PokeType> normalEffective = [];
-    List<PokeType> notVeryEffective = [];
-    List<PokeType> slightlyEffective = [];
-    List<PokeType> noEffective = [];
+    if (secondary == primary) secondary = null;
+    EffectiveTypeResult result = EffectiveTypeResult();
 
-    allElements.forEach((element) {
-      AtkEffect? effectivePrimary;
-      AtkEffect? effectiveSecondary;
-
-      effectivePrimary = _searchEffectByElement(
+    for (final element in PokeType.allPokeTypes) {
+      Effective? effectivePrimary = _searchEffectByElement(
         elementThatTakenDamage: primary,
         elementThatAttack: element,
       );
 
+      Effective? effectiveSecondary;
       if (secondary != null) {
         effectiveSecondary = _searchEffectByElement(
           elementThatTakenDamage: secondary,
@@ -55,136 +54,36 @@ class ElementCalculator {
         );
       }
 
-      if (effectivePrimary != null) {
-        double multiplier = effectivePrimary.multiplier;
-        if (effectiveSecondary != null) {
-          multiplier = multiplier * effectiveSecondary.multiplier;
-        }
+      final double multiplier =
+          effectivePrimary.multiplier * (effectiveSecondary?.multiplier ?? 1);
 
-        if (multiplier == AtkEffect.MegaEffective.multiplier) {
-          megaEffective.add(element);
-        } else if (multiplier == AtkEffect.SuperEffective.multiplier) {
-          superEffective.add(element);
-        } else if (multiplier == AtkEffect.NormalEffective.multiplier) {
-          normalEffective.add(element);
-        } else if (multiplier == AtkEffect.NotVeryEffective.multiplier) {
-          notVeryEffective.add(element);
-        } else if (multiplier == AtkEffect.SlightlyEffective.multiplier) {
-          slightlyEffective.add(element);
-        } else if (multiplier == AtkEffect.NoEffective.multiplier) {
-          noEffective.add(element);
-        }
+      if (multiplier == Effective.MegaEffective.multiplier) {
+        result = result.copyWith(
+          megaEffective: [...result.megaEffective, element],
+        );
+      } else if (multiplier == Effective.SuperEffective.multiplier) {
+        result = result.copyWith(
+          superEffective: [...result.superEffective, element],
+        );
+      } else if (multiplier == Effective.NormalEffective.multiplier) {
+        result = result.copyWith(
+          normalEffective: [...result.normalEffective, element],
+        );
+      } else if (multiplier == Effective.NotVeryEffective.multiplier) {
+        result = result.copyWith(
+          notVeryEffective: [...result.notVeryEffective, element],
+        );
+      } else if (multiplier == Effective.SlightlyEffective.multiplier) {
+        result = result.copyWith(
+          slightlyEffective: [...result.slightlyEffective, element],
+        );
+      } else if (multiplier == Effective.NoEffective.multiplier) {
+        result = result.copyWith(
+          noEffective: [...result.noEffective, element],
+        );
       }
-    });
-
-    return PokeDamageElement(
-      megaEffective: megaEffective,
-      superEffective: superEffective,
-      normalEffective: normalEffective,
-      notVeryEffective: notVeryEffective,
-      slightlyEffective: slightlyEffective,
-      noEffective: noEffective,
-    );
-  }
-
-  static AtkEffect? _searchEffectByElement({
-    required PokeType elementThatTakenDamage,
-    required PokeType elementThatAttack,
-  }) {
-    AtkEffect? output;
-    switch (elementThatTakenDamage) {
-      case Normal:
-        {
-          output = elementThatAttack.atk.normal;
-          break;
-        }
-      case Fire:
-        {
-          output = elementThatAttack.atk.fire;
-          break;
-        }
-      case Water:
-        {
-          output = elementThatAttack.atk.water;
-          break;
-        }
-      case Electric:
-        {
-          output = elementThatAttack.atk.electric;
-          break;
-        }
-      case Grass:
-        {
-          output = elementThatAttack.atk.grass;
-          break;
-        }
-      case Ice:
-        {
-          output = elementThatAttack.atk.ice;
-          break;
-        }
-      case Fighting:
-        {
-          output = elementThatAttack.atk.fighting;
-          break;
-        }
-      case Poison:
-        {
-          output = elementThatAttack.atk.poison;
-          break;
-        }
-      case Ground:
-        {
-          output = elementThatAttack.atk.ground;
-          break;
-        }
-      case Flying:
-        {
-          output = elementThatAttack.atk.flying;
-          break;
-        }
-      case Psychic:
-        {
-          output = elementThatAttack.atk.psychic;
-          break;
-        }
-      case Bug:
-        {
-          output = elementThatAttack.atk.bug;
-          break;
-        }
-      case Rock:
-        {
-          output = elementThatAttack.atk.rock;
-          break;
-        }
-      case Ghost:
-        {
-          output = elementThatAttack.atk.ghost;
-          break;
-        }
-      case Dragon:
-        {
-          output = elementThatAttack.atk.dragon;
-          break;
-        }
-      case Dark:
-        {
-          output = elementThatAttack.atk.dark;
-          break;
-        }
-      case Steel:
-        {
-          output = elementThatAttack.atk.steel;
-          break;
-        }
-      case Fairly:
-        {
-          output = elementThatAttack.atk.fairly;
-          break;
-        }
     }
 
-    return output;
+    return result;
   }
 }

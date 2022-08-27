@@ -8,57 +8,63 @@ class PokeTypeEffectiveView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final effective = ref.watch(poketypeDamageResultProvider);
+    final effective = ref.watch(effectiveTypeResultProvider);
+    final megaEffective = effective.megaEffective;
+    final superEffective = effective.superEffective;
+    final normalEffective = effective.normalEffective;
+    final notVeryEffective = effective.notVeryEffective;
+    final slightlyEffective = effective.slightlyEffective;
+    final noEffective = effective.noEffective;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        if (effective.megaEffective.isNotEmpty)
+        if (megaEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x4',
-              effective.megaEffective,
+              megaEffective,
             ),
           ),
-        if (effective.superEffective.isNotEmpty)
+        if (superEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x2',
-              effective.superEffective,
+              superEffective,
             ),
           ),
-        if (effective.normalEffective.isNotEmpty)
+        /*if (normalEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x1',
-              effective.normalEffective,
+              normalEffective,
             ),
-          ),
-        if (effective.notVeryEffective.isNotEmpty)
+          ),*/
+        if (notVeryEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x0.5',
-              effective.notVeryEffective,
+              notVeryEffective,
             ),
           ),
-        if (effective.slightlyEffective.isNotEmpty)
+        if (slightlyEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x0.25',
-              effective.slightlyEffective,
+              slightlyEffective,
             ),
           ),
-        if (effective.noEffective.isNotEmpty)
+        if (noEffective.isNotEmpty)
           Flexible(
             flex: 1,
             child: PokeTypeEffectiveItemView(
               'x0',
-              effective.noEffective,
+              noEffective,
             ),
           ),
       ],

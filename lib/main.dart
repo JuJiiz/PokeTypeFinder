@@ -18,7 +18,8 @@ class PokeFinderApp extends StatelessWidget {
     return MaterialApp(
       title: 'PokeFinder',
       theme: ThemeData(
-        primaryColor: Color(0xFFeb6652),
+        primaryColor: Color(0xffd9432e),
+        backgroundColor: Color(0xFFEFEFEF)
       ),
       home: HomePage(),
     );

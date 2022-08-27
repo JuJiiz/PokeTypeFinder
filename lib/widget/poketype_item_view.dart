@@ -20,15 +20,15 @@ class PokeTypeItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = isSelected ? Colors.white : item.color;
+    final borderColor =
+        isSelected ? Theme.of(context).backgroundColor : Color(0xFF1A1A1A);
 
     return InkWell(
       onTap: _toggleSelectPokeType,
       child: Container(
-        width: 100,
         margin: EdgeInsets.all(8),
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
           color: item.color,
           border: Border.all(width: 4, color: borderColor),

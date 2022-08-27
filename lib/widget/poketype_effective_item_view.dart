@@ -16,14 +16,14 @@ class PokeTypeEffectiveItemView extends StatelessWidget {
         Text(
           name,
           style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Colors.white
-          ),
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A)),
         ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          children: items.map((e) => PokeTypeItemView(item: e)).toList(),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: items.length,
+          itemBuilder: (context, index) => PokeTypeItemView(item: items[index]),
         ),
       ],
     );
